@@ -14,8 +14,7 @@ const createTask = async (task ,completed) => {
      return postdata
 };
 
-const 
-FindTaskById = async (taskId) => {
+const FindTaskById = async (taskId) => {
 
     const task= TaskModel.findByPk(taskId)
     return task
