@@ -5,7 +5,6 @@ exports.addTask = async (req, res) => {
     const {task,completed}= req.body
 
     try {
-        console.log("-----------------tryyy");
         const newTask = await TaskService.createTask(task, completed);
         res.status(201).json({newTask});
     } catch (error) {
@@ -75,7 +74,7 @@ exports.updateTask = async (req, res) => {
 
 exports.getFilteredTasks = async (req, res) => {
     try {
-        const { completed } = req.query; 
+        const { completed,page=1,limit=10 } = req.query; 
         let filter = null;
 
         if (completed === 'true') {
@@ -84,8 +83,8 @@ exports.getFilteredTasks = async (req, res) => {
             filter = false;
         }
 
-        const tasks = await TaskService.getFilteredTasks(filter);
-        res.status(200).json(tasks);
+        const tasks = await TaskService.getFilteredTasks(filter,page,limit);
+        res.status(200).json({"rows":tasks});
     } catch (error) {
         res.status(500).json({ message: 'Error fetching tasks', error });
     }
