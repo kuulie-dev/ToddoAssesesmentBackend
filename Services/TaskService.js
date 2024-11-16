@@ -5,6 +5,7 @@ const TaskModel = db.TaskModel;
 
 const createTask = async (task ,completed) => {
 
+    console.log(`this is controller file I am testing for changes`);
      const postdata =  await  TaskModel.findOrCreate( { 
         where: { task: task },    
         defaults: {                   
